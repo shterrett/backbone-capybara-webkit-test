@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  root 'users#index'
+  get 'users' => 'users#index', as: :users
+  get 'users/:id' => 'users#edit', as: :edit_user
+  patch 'users/:id' => 'users#update'
+  put 'users/:id' => 'users#update'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

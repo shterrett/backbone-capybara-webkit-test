@@ -1,0 +1,30 @@
+<section id="edit-user">
+  <h1>Edit User</h2>
+  <section id="backbone"></section>
+
+  <label for="name">
+    <input type="text" name="name" id="name" value="<%= @user.name %>" />
+  </label>
+
+  <label for="email">
+    <input type="email" name="email" id="email" value="<%= @user.email %>" />
+  </label>
+
+  <button id="put">Put</button>
+  <button id="patch">Patch</button>
+</section>
+
+
+<script type='text/json' id='bootstrap'>
+  { "user": { "name": "<%= @user.name %>",
+              "email": "<%= @user.email %>",
+              "id": "<%= @user.id %>"
+            }
+  }
+</script>
+
+<%= javascript_tag do %>
+  var userData = $.parseJSON($('#bootstrap')[0].innerHTML)['user'];
+  var user = new BackbonePatch.Models.User(userData);
+  var editView = new BackbonePatch.Views.Users.Edit({ model: user });
+<% end %>
